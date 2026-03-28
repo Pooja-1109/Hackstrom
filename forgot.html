@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forgot Password</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 350px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #4facfe;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00c6ff;
+}
+
+.links {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.message {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Forgot Password</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="new_password" placeholder="New Password">
+    <input type="password" id="confirm_password" placeholder="Confirm Password">
+
+    <button onclick="resetPassword()">Reset Password</button>
+
+    <div class="message" id="msg"></div>
+
+    <div class="links">
+        <a href="login.html">Back to Login</a> | 
+        <a href="signup.html">Signup</a>
+    </div>
+</div>
+
+<script>
+function resetPassword() {
+    let email = document.getElementById("email").value.trim();
+    let new_password = document.getElementById("new_password").value;
+    let confirm_password = document.getElementById("confirm_password").value;
+    let msg = document.getElementById("msg");
+
+    // Validation
+    if (!email) {
+        alert("Email is required");
+        return;
+    }
+
+    if (new_password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+    }
+
+    if (new_password !== confirm_password) {
+        alert("Passwords do not match");
+        return;
+    }
+
+    // Send request
+    fetch("http://127.0.0.1:5000/api/auth/forgot", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            new_password: new_password
+        })
+    })
+    .then(async res => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Error occurred');
+        return data;
+    })
+    .then(data => {
+        msg.innerText = data.message;
+        alert(data.message);
+        // redirect to login page automatically after reset
+        setTimeout(() => window.location.href = 'login.html', 1200);
+    })
+    .catch(error => {
+        msg.innerText = error.message;
+        alert(error.message);
+    });
+}
+</script>
+
+</body>
+</html>
