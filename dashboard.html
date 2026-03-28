@@ -17,11 +17,39 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
             min-height: 100vh;
-            padding: 20px;
+            padding: 25px;
             color: #333;
             scroll-behavior: smooth;
             animation: fadeIn 0.5s ease;
+            position: relative;
+        }
+
+        /* Add animated background circles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: float-bg 15s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float-bg {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, -50px) rotate(10deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
         }
 
         /* Smooth Page Load */
@@ -41,7 +69,7 @@
             align-items: center;
             background: rgba(255, 255, 255, 0.95);
             padding: 25px 40px;
-            border-radius: 20px;
+            border-radius: 25px;
             margin-bottom: 30px;
             box-shadow: 0 10px 40px rgba(102, 126, 234, 0.1);
             backdrop-filter: blur(10px);
@@ -61,7 +89,7 @@
         }
 
         header h1 {
-            font-size: 28px;
+            font-size: 32px;
             color: #667eea;
             display: flex;
             align-items: center;
@@ -89,8 +117,8 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
             color: white;
             padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
+            border-radius: 25px;
+            font-weight: 700;
             font-size: 14px;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
             animation: slideIn 0.6s ease;
@@ -110,11 +138,11 @@
         .user-info a {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px 24px;
+            padding: 16px 24px;
             border-radius: 12px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: 600;
+            font-weight: 700;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
             position: relative;
             overflow: hidden;
@@ -180,8 +208,8 @@
             border: none;
             padding: 14px 28px;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             color: #555;
@@ -272,7 +300,7 @@
 
         .flashcard {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 45px;
             box-shadow: 0 20px 60px rgba(102, 126, 234, 0.15), 
                         0 0 0 1px rgba(102, 126, 234, 0.05);
@@ -365,10 +393,10 @@
         .flashcard-counter {
             color: #667eea;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 700;
             background: rgba(102, 126, 234, 0.08);
             padding: 6px 14px;
-            border-radius: 20px;
+            border-radius: 25px;
         }
 
         .flashcard-content {
@@ -382,11 +410,11 @@
         }
 
         .flashcard-text {
-            font-size: 22px;
+            font-size: 24px;
             color: #2d3748;
             line-height: 1.8;
             text-align: center;
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
         }
 
@@ -430,7 +458,7 @@
             flex: 1;
             padding: 18px 30px;
             border: none;
-            border-radius: 15px;
+            border-radius: 25px;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
@@ -494,7 +522,7 @@
 
         .no-flashcards {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 80px 40px;
             text-align: center;
             box-shadow: 0 20px 60px rgba(102, 126, 234, 0.1);
@@ -532,7 +560,7 @@
         /* ========== KNOWLEDGE MAP ========== */
         .knowledge-map {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 45px;
             box-shadow: 0 20px 60px rgba(102, 126, 234, 0.12);
             animation: fadeInUp 0.6s ease;
@@ -642,20 +670,20 @@
         .knowledge-card-count {
             font-size: 13px;
             opacity: 0.95;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .knowledge-card-strength {
             font-size: 12px;
             margin-top: 10px;
             opacity: 0.9;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* ========== SEARCH SECTION ========== */
         .search-container {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 35px 45px;
             box-shadow: 0 20px 60px rgba(102, 126, 234, 0.12);
             margin-bottom: 30px;
@@ -672,8 +700,8 @@
             flex: 1;
             padding: 16px 24px;
             border: 2px solid #e1e5e9;
-            border-radius: 15px;
-            font-size: 16px;
+            border-radius: 25px;
+            font-size: 17px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             background: white;
         }
@@ -690,7 +718,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 15px;
+            border-radius: 25px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -731,7 +759,7 @@
         .result-card {
             background: #f8f9fa;
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             border-left: 4px solid #667eea;
             transition: all 0.3s ease;
         }
@@ -745,9 +773,9 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 4px 12px;
-            border-radius: 15px;
+            border-radius: 25px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
             margin-bottom: 10px;
         }
@@ -782,7 +810,7 @@
 
         .retention-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 25px;
             padding: 30px 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
@@ -864,7 +892,7 @@
         }
 
         .topic-name {
-            font-weight: 600;
+            font-weight: 700;
             color: #333;
             margin-bottom: 8px;
         }
@@ -885,7 +913,7 @@
 
         .topic-percentage {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: #667eea;
             min-width: 50px;
             text-align: right;
@@ -894,7 +922,7 @@
         /* ========== QUIZ STYLES ========== */
         .quiz-container {
             background: white;
-            border-radius: 15px;
+            border-radius: 25px;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
@@ -903,7 +931,7 @@
             font-size: 20px;
             margin-bottom: 25px;
             color: #333;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.6;
         }
 
@@ -921,7 +949,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .quiz-option:hover {
@@ -941,9 +969,9 @@
 
         .quiz-feedback {
             margin-top: 20px;
-            padding: 15px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 18px;
+            font-size: 17px;
+            font-weight: 700;
             color: #555;
             border-radius: 10px;
             background: #f8f9fa;
@@ -951,15 +979,15 @@
 
         .quiz-next-btn {
             margin-top: 30px;
-            padding: 15px 30px;
+            padding: 18px 30px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px;
+            font-size: 17px;
         }
 
         .quiz-next-btn:hover {
@@ -997,7 +1025,7 @@
             header {
                 flex-direction: column;
                 gap: 20px;
-                padding: 20px;
+                padding: 25px;
             }
 
             .search-results {
@@ -1011,7 +1039,7 @@
             }
 
             header h1 {
-                font-size: 22px;
+                font-size: 24px;
             }
 
             .flashcard {
@@ -1020,7 +1048,7 @@
             }
 
             .flashcard-text {
-                font-size: 16px;
+                font-size: 17px;
             }
 
             .flashcard-buttons {
@@ -1051,7 +1079,7 @@
 
         @media (max-width: 480px) {
             header {
-                padding: 15px;
+                padding: 18px;
             }
 
             header h1 {
@@ -1584,7 +1612,7 @@
             const questionNumber = currentQuizIndex + 1;
 
             quizWrapper.innerHTML = `
-                <div style="margin-bottom: 20px; color: #667eea; font-weight: 600;">
+                <div style="margin-bottom: 20px; color: #667eea; font-weight: 700;">
                     Question ${questionNumber} of ${quizData.length}
                 </div>
                 <div class="quiz-question">${quiz.question}</div>
